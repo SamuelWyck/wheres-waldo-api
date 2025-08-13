@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const assetRoute = require("./routes/assetRoute.js");
 
 
 
@@ -13,6 +14,7 @@ app.use(express.urlencoded({extended: true}));
 app.get("/", function(req, res) {
     return res.send("hello");
 });
+app.use("/assets", assetRoute);
 
 
 
