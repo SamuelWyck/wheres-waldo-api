@@ -13,3 +13,42 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Leaderboard {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  time      Int
+  timestamp DateTime @default(now())
+}
+
+model Character {
+  id   String @id @default(uuid())
+  name String
+}
+
+model Image {
+  id              String            @id @default(uuid())
+  url             String
+  width           Int
+  height          Int
+  characterCoords CharacterCoords[]
+}
+
+model CharacterCoords {
+  id      String @id @default(uuid())
+  xCoord  Int
+  yCoord  Int
+  width   Int
+  height  Int
+  image   Image  @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  imageId String
+}
+
+model GameRound {
+  id          String    @id @default(uuid())
+  startTime   DateTime  @default(now())
+  endTime     DateTime?
+  foundWaldo  Boolean   @default(false)
+  foundWizard Boolean   @default(false)
+  foundWilma  Boolean   @default(false)
+}
