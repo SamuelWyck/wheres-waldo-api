@@ -20,7 +20,7 @@ const getIconsGet = asyncHandler(async function(req, res) {
         delete image.id;
     }
 
-    return res.json({images});
+    return res.json({icons: images});
 });
 
 
