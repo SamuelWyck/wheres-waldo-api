@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -22,26 +22,31 @@ model Leaderboard {
 }
 
 model Character {
-  id   String @id @default(uuid())
-  name String
+  id     String            @id @default(uuid())
+  name   String
+  coords CharacterCoords[]
 }
 
 model Image {
   id              String            @id @default(uuid())
+  name            String
   url             String
+  iconUrl         String
   width           Int
   height          Int
   characterCoords CharacterCoords[]
 }
 
 model CharacterCoords {
-  id      String @id @default(uuid())
-  xCoord  Int
-  yCoord  Int
-  width   Int
-  height  Int
-  image   Image  @relation(fields: [imageId], references: [id], onDelete: Cascade)
-  imageId String
+  id          String    @id @default(uuid())
+  xCoord      Int
+  yCoord      Int
+  width       Int
+  height      Int
+  image       Image     @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  imageId     String
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  characterId String
 }
 
 model GameRound {
