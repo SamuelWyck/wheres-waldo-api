@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 const assetRoute = require("./routes/assetRoute.js");
 
@@ -6,7 +7,7 @@ const assetRoute = require("./routes/assetRoute.js");
 
 const app = express();
 
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
