@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const assetRoute = require("./routes/assetRoute.js");
+const iconsRoute = require("./routes/iconsRoute.js");
 
 
 
@@ -15,7 +15,7 @@ app.use(express.urlencoded({extended: true}));
 app.get("/", function(req, res) {
     return res.send("hello");
 });
-app.use("/assets", assetRoute);
+app.use("/icons", iconsRoute);
 
 
 
