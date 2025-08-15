@@ -11,7 +11,27 @@ async function getManyImages(options) {
 };
 
 
+async function findUniqueImage(options) {
+    const image = await prisma.image.findUnique(options);
+    return image;
+};
+
+
+async function createGameLog(options) {
+    const gameLog = await prisma.gameRound.create(options);
+    return gameLog;
+};
+
+
+async function deleteManyGameLogs(options) {
+    await prisma.gameRound.deleteMany(options);
+};
+
+
 
 module.exports = {
-    getManyImages
+    getManyImages,
+    createGameLog,
+    findUniqueImage,
+    deleteManyGameLogs
 };
