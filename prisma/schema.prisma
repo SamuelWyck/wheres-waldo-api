@@ -35,6 +35,7 @@ model Image {
   width           Int
   height          Int
   characterCoords CharacterCoords[]
+  gameRounds      GameRound[]
 }
 
 model CharacterCoords {
@@ -56,4 +57,6 @@ model GameRound {
   foundWaldo  Boolean   @default(false)
   foundWizard Boolean   @default(false)
   foundWilma  Boolean   @default(false)
+  image       Image     @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  imageId     String 
 }
