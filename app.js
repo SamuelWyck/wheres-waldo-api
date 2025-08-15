@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const iconsRoute = require("./routes/iconsRoute.js");
+const gameRoute = require("./routes/gameRoute.js");
 
 
 
@@ -16,6 +17,7 @@ app.get("/", function(req, res) {
     return res.send("hello");
 });
 app.use("/icons", iconsRoute);
+app.use("/play", gameRoute);
 
 
 
