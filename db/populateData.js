@@ -2,6 +2,7 @@ const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 const {PrismaClient} = require("../generated/prisma");
 const characterCoords = require("./characterCoords.js");
+const leaderboardEntries = require("./leaderboardData.js");
 
 
 
@@ -121,9 +122,14 @@ async function main() {
         
         addIdsToCharacterCoords(savedImages, characters);
         
-        await prisma.characterCoords.createMany({
-            data: characterCoords
-        });
+        await Promise.all([
+            prisma.characterCoords.createMany({
+                data: characterCoords
+            }),
+            prisma.leaderboard.createMany({
+                data: leaderboardEntries
+            })
+        ]);
 
         console.log("done");
     } catch (err) {
