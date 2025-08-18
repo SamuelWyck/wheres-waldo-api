@@ -1,4 +1,5 @@
 const {header, body} = require("express-validator");
+const db = require("../db/querys.js");
 
 
 
@@ -10,6 +11,21 @@ function isValidCharacter(character) {
     ]);
 
     return characters.has(character);
+};
+
+
+async function isUniqueName(name) {
+    const entry = await db.findUniqueLeaderboardEntry({
+        where: {
+            username: name
+        }
+    });
+
+    if (entry) {
+        throw new Error("Name already taken");
+    }
+
+    return true;
 };
 
 
@@ -35,7 +51,18 @@ const guessVal = [
 
 
 
+const leaderboardVal = [
+    header("gameid").trim()
+        .notEmpty().withMessage("Missing game id"),
+    body("name").trim()
+        .notEmpty().withMessage("Name required")
+        .isLength({max: 100}).withMessage("Name must be less than 100 characters")
+        .custom(isUniqueName).withMessage("Name already taken")
+];
+
+
 
 module.exports = {
-    guessVal
+    guessVal,
+    leaderboardVal
 };
