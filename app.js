@@ -3,14 +3,15 @@ const cors = require("cors");
 require("dotenv").config();
 const iconsRoute = require("./routes/iconsRoute.js");
 const gameRoute = require("./routes/gameRoute.js");
+const leaderboardRoute = require("./routes/leaderBoardRoute.js");
 
 
 
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 
 app.get("/", function(req, res) {
@@ -18,6 +19,7 @@ app.get("/", function(req, res) {
 });
 app.use("/icons", iconsRoute);
 app.use("/play", gameRoute);
+app.use("/leaderboard", leaderboardRoute);
 
 
 
