@@ -48,6 +48,42 @@ async function updateGameLog(options) {
 };
 
 
+async function deleteGameLog(options) {
+    const gameLog = await prisma.gameRound.delete(options);
+    return gameLog;
+};
+
+
+async function findUniqueLeaderboardEntry(options) {
+    const entry = await prisma.leaderboard.findUnique(options);
+    return entry;
+};
+
+
+async function createLeaderboardEntry(options) {
+    const entry = await prisma.leaderboard.create(options);
+    return entry;
+};
+
+
+async function findLeaderboardEntry(options) {
+    const entry = await prisma.leaderboard.findFirst(options);
+    return entry;
+};
+
+
+async function deleteLeaderboardEntry(options) {
+    const entry = await prisma.leaderboard.delete(options);
+    return entry;
+};
+
+
+async function findManyLeaderboardEntries(options) {
+    const entries = await prisma.leaderboard.findMany(options);
+    return entries;
+};
+
+
 
 module.exports = {
     getManyImages,
@@ -56,5 +92,11 @@ module.exports = {
     deleteManyGameLogs,
     findUniqueGameLog,
     findCharCoordsForImg,
-    updateGameLog
+    updateGameLog,
+    deleteGameLog,
+    findUniqueLeaderboardEntry,
+    createLeaderboardEntry,
+    findLeaderboardEntry,
+    deleteLeaderboardEntry,
+    findManyLeaderboardEntries
 };
