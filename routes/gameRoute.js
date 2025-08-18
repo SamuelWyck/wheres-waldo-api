@@ -6,7 +6,11 @@ const cleanGameRecords = require("../utils/cleanGameRecords.js");
 
 const gameRoute = Router();
 
-gameRoute.get("/start/:imageId", cleanGameRecords, gameController.gameStartGet);
+
+gameRoute.use(cleanGameRecords);
+
+gameRoute.get("/start/:imageId", gameController.gameStartGet);
+gameRoute.post("/guess", gameController.makeGuessPost);
 
 
 
