@@ -4,7 +4,7 @@ const {guessVal} = require("../utils/validators.js");
 const {validationResult} = require("express-validator");
 const remapValue = require("../utils/remapValue.js");
 const getCharacterRect = require("../utils/getCharacterRect.js");
-const checkRectCollsion = require("../utils/checkRectCollsion.js");
+const checkRectCollision = require("../utils/checkRectCollision.js");
 const countFoundCharacters = require("../utils/countFoundCharacters.js");
 
 
@@ -82,7 +82,7 @@ const makeGuessPost = asyncHandler(async function(req, res) {
         imageId, character
     );
 
-    const collide = checkRectCollsion(
+    const collide = checkRectCollision(
         {
             xCoord: remappedX,
             yCoord: remappedY,
