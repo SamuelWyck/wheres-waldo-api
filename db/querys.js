@@ -28,10 +28,33 @@ async function deleteManyGameLogs(options) {
 };
 
 
+async function findUniqueGameLog(options) {
+    const gameLog = await prisma.gameRound.findUnique(options);
+    return gameLog;
+};
+
+
+async function findCharCoordsForImg(options) {
+    const coordSets = await prisma.characterCoords.findMany(
+        options
+    );
+    return coordSets;
+};
+
+
+async function updateGameLog(options) {
+    const gameLog = await prisma.gameRound.update(options);
+    return gameLog;
+};
+
+
 
 module.exports = {
     getManyImages,
     createGameLog,
     findUniqueImage,
-    deleteManyGameLogs
+    deleteManyGameLogs,
+    findUniqueGameLog,
+    findCharCoordsForImg,
+    updateGameLog
 };
