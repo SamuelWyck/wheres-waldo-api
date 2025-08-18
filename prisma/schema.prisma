@@ -51,12 +51,12 @@ model CharacterCoords {
 }
 
 model GameRound {
-  id          String    @id @default(uuid())
-  startTime   DateTime  @default(now())
-  endTime     DateTime?
-  foundWaldo  Boolean   @default(false)
-  foundWizard Boolean   @default(false)
-  foundWilma  Boolean   @default(false)
-  image       Image     @relation(fields: [imageId], references: [id], onDelete: Cascade)
-  imageId     String 
+  id        String    @id @default(uuid())
+  startTime DateTime  @default(now())
+  endTime   DateTime?
+  waldo     Boolean   @default(false)
+  wizard    Boolean   @default(false)
+  wilma     Boolean   @default(false)
+  image     Image     @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  imageId   String
 }
