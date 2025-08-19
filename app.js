@@ -17,6 +17,16 @@ app.use(express.json());
 app.use("/icons", iconsRoute);
 app.use("/play", gameRoute);
 app.use("/leaderboard", leaderboardRoute);
+app.use(function(req, res) {
+    return res.status(404).json(
+        {errors: [{msg: "Page not found"}]}
+    );
+});
+app.use(function(error, req, res, next) {
+    return res.status(500).json(
+        {errors: [{msg: error.message}]}
+    );
+});
 
 
 
