@@ -14,9 +14,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 
-app.get("/", function(req, res) {
-    return res.send("hello");
-});
 app.use("/icons", iconsRoute);
 app.use("/play", gameRoute);
 app.use("/leaderboard", leaderboardRoute);
