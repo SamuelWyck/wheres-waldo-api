@@ -12,7 +12,9 @@ const getIconsGet = asyncHandler(async function(req, res) {
     });
 
     if (!images) {
-        return res.json({error: "Icons not found"});
+        return res.status(500).json(
+            {errors: [{msg: "Icons not found"}]}
+        );
     }
 
     for (let image of images) {

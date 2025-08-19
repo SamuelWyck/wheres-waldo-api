@@ -12,7 +12,9 @@ const countFoundCharacters = require("../utils/countFoundCharacters.js");
 const gameStartGet = asyncHandler(async function(req, res) {
     const imageId = req.params.imageId;
     if (!imageId) {
-        return res.status(400).json({error: "Missing imageId param"});
+        return res.status(400).json(
+            {errors: [{msg: "Missing imageId param"}]}
+        );
     }
 
     const image = await db.findUniqueImage({
@@ -21,7 +23,9 @@ const gameStartGet = asyncHandler(async function(req, res) {
         }
     });
     if (!image) {
-        return res.status(400).json({error: "Image not found"});
+        return res.status(400).json(
+            {errors: [{msg: "Image not found"}]}
+        );
     }
 
     const gameLog = await db.createGameLog({
@@ -55,10 +59,14 @@ const makeGuessPost = asyncHandler(async function(req, res) {
         }
     });
     if (!gameSession) {
-        return res.status(400).json({error: "Game not found"});
+        return res.status(400).json(
+            {errors: [{msg: "Game not found"}]}
+        );
     }
     if (countFoundCharacters(gameSession) === maxCharacters) {
-        return res.status(400).json({error: "Game already done"});
+        return res.status(400).json(
+            {errors: [{msg: "Game already done"}]}
+        );
     }
 
     const xCoord = Number(req.body.xCoord);
